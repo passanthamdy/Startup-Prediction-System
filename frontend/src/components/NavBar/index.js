@@ -1,5 +1,6 @@
 import React from 'react'
 import {FaBars} from 'react-icons/fa'
+import logo from '../../images/logo.png'
 import {
      Nav,
      NavbarContainer,
@@ -20,7 +21,7 @@ const Navbar = () => {
         <>
         <Nav>
             <NavbarContainer>
-                <NavLogo to='/'>startupista</NavLogo>
+                <NavLogo to='/'><img src={logo}></img></NavLogo>
                 <MobileIcon>
                     <FaBars />
                 </MobileIcon>
