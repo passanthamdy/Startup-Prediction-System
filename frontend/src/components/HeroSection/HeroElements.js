@@ -23,17 +23,7 @@ z-index: 1;
     linear-gradient(180deg, rgba(0,0,0,0.2)0%, transparent 100%);
     z-index: 2;
 }
-@media screen and (min-width: 769px) {
-  .chat-footer {
-    height: 70px;
-  }
-}
 
-@media screen and (min-width: 550px) {
-  .chat-footer {
-    height: 90px;
-  }
-}
 
 `
 
