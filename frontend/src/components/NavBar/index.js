@@ -10,7 +10,8 @@ import {
      NavItems, 
      NavLinks,
      NavBtnLink,
-     NavBtn
+     NavBtn, 
+     NavLinksR
     }
      from './NavbarElements'
 
@@ -21,7 +22,7 @@ const Navbar = ({toggle}) => {
         <>
         <Nav>
             <NavbarContainer>
-                <NavLogo to='/'><img src={logo}></img></NavLogo>
+                <NavLogo to='/'><img src={logo} alt="logo"></img></NavLogo>
                 <MobileIcon onClick= {toggle}>
                     <FaBars />
                 </MobileIcon>
@@ -36,10 +37,10 @@ const Navbar = ({toggle}) => {
                         <NavLinks to='services'>Services</NavLinks>
                     </NavItems>
                     <NavItems>
-                        <NavLinks to='startups'>Startups</NavLinks>
+                        <NavLinksR to='/posts'>Startups</NavLinksR>
                     </NavItems>
                     <NavItems>
-                        <NavLinks to='investors'>Investors</NavLinks>
+                        <NavLinksR to='/investors'>Investors</NavLinksR>
                     </NavItems>
                     <NavItems>
                         <NavLinks to='signup'>Signup</NavLinks>

@@ -6,7 +6,8 @@ import {
     SidebarWrapper, 
     SidebarLink, 
     SidebarMenu, 
-    SideBtnWrap, 
+    SideBtnWrap,
+    SidebarLinkR, 
     SideBarRoute} from './SidebarElements'
 const Sidebar = ({isOpen, toggle}) => {
     return (
@@ -25,15 +26,15 @@ const Sidebar = ({isOpen, toggle}) => {
                     <SidebarLink to='services' onClick= {toggle}>
                         Services
                     </SidebarLink>
-                    <SidebarLink to='startups' onClick= {toggle}>
+                    <SidebarLinkR to='/posts' onClick= {toggle}>
                         Startups
-                    </SidebarLink>
-                    <SidebarLink to='investors' onClick= {toggle}>
+                    </SidebarLinkR>
+                    <SidebarLinkR to='/investors' onClick= {toggle}>
                         Investors
-                    </SidebarLink>
-                    <SidebarLink to='signup' onClick= {toggle}>
+                    </SidebarLinkR>
+                    <SidebarLinkR to='/signup' onClick= {toggle}>
                         Signup
-                    </SidebarLink>
+                    </SidebarLinkR>
                 </SidebarMenu>
             <SideBtnWrap>
                 <SideBarRoute to='/signin' onClick= {toggle}>
