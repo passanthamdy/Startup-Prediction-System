@@ -1,5 +1,16 @@
 import React from 'react'
-
+import icon1 from '../../images/svg-4.svg'
+import icon2 from '../../images/svg-5.svg'
+import icon3 from '../../images/svg-6.svg'
+import 
+    {ServicesContainer, 
+    ServicesWrapper, 
+    ServicesH1, 
+    ServicesH2, 
+    ServicesCard, 
+    ServicesIcon, 
+    ServicesP} 
+    from './ServicesElements'
 const Services = () => {
     return (
         <ServicesContainer id="services">
@@ -13,7 +24,7 @@ const Services = () => {
                 <ServicesCard>
                     <ServicesIcon src={icon2}/>
                     <ServicesH2>Find your chances to succeed</ServicesH2>
-                    <ServicesP>We help you to find the exact percentage of how your startup will succeed</ServicesP>
+                    <ServicesP>We help you to find the exact percentage of how your startup will succeed.</ServicesP>
                 </ServicesCard>
                 <ServicesCard>
                     <ServicesIcon src={icon3}/>
