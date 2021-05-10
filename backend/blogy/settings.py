@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'blogy.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'blogy',
+        'NAME': 'sps',
         'USER':'postgres',
         'PASSWORD':'password',
         'HOST': 'localhost',
