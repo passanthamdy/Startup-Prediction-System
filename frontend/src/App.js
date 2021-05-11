@@ -6,6 +6,7 @@ import SignupPage from './pages/signup';
 import PostsPage from './pages/posts';
 import InvestorsPage from './pages/investors';
 import Navbar from './components/NavBar';
+
 function App() {
   return (
     <Router >
@@ -17,6 +18,7 @@ function App() {
         <Route path="/investors" component={InvestorsPage} exact/>
       </Switch>
     </Router>
+    
   );
 }
 
