@@ -37,13 +37,12 @@ const SignUp = () => {
 				user_name: formData.username,
 				password: formData.password,
 			})
-			.then((res) => {
-				history.push('/');
-				console.log(res);
-				console.log(res.data);
+			.then( res => {
+                console.log('res')
+                history.push('/');
 			})
-            .catch((err) =>{
-                console.log(err)
+            .catch((error) =>{
+                console.log('error', error.response.data)
             });
 	};
     return (
