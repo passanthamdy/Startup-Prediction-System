@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axiosInstance from '../../axiosInstance';
 import { useHistory } from 'react-router-dom';
 
+
 //matrial 
 import logo from '../../images/logo.png'
 import { Container, Form, FormButton, FormContent, FormH1, FormInput, FormLabel, FormWrap, Icon, Text, TextR } from './SignUpElements'
@@ -49,8 +50,10 @@ const SignUp = () => {
         <>
              <Container>
                  <FormWrap>
+                     <Icon to="/"><img src={logo} alt="logo"></img></Icon>
                     <FormContent>
                         <Form >
+                            
                             <FormH1>Sign in to your account</FormH1>
                             <FormLabel htmlFor='for'>User Name</FormLabel>
                             <FormInput type="text" required name="username" onChange={handleChange}/>

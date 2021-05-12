@@ -6,13 +6,7 @@ import NavBar from '../components/NavBar'
 const SigninPage = () => {
     return (
         <>
-            <NavBar />
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+            
             <SignIn/>
         </>
     )

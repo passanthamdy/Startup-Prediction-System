@@ -7,12 +7,10 @@ const SignupPage = () => {
     return (
         <>
         
-            <NavBar />
+            
             <SignUp />
-            <br/>
-            <br/>
-            <br/>
-            <Footer />
+            
+            
         </>
     )
 }
