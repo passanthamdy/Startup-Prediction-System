@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 
 export const Container = styled.div`
-min-height:00px;
+min-height:692px;
 position:fixed;
 bottom:0;
 left:0;
@@ -40,10 +40,10 @@ font-size: 32px;
 `
 
 export const FormContent = styled.div`
-height: 100%;
-display: flex;
-flex-direction: column;
-justify-content: center;
+height: 800px;
+//display: flex;
+//flex-direction: column;
+//justify-content: center;
 
 @media screen and (max-width: 480px){
     padding: 10px;

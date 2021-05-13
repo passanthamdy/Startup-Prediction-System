@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import axiosInstance from '../../axiosInstance';
 import { useHistory } from 'react-router-dom';
-
+import Container from 'react-bootstrap/Container'
 
 //matrial 
 import logo from '../../images/logo.png'
-import { Container, Form, FormButton, FormContent, FormH1, FormInput, FormLabel, FormWrap, Icon, Text, TextR } from './SignUpElements'
+import {  Form, FormButton, FormContent, FormH1, FormInput, FormLabel, FormWrap, Icon, Text, TextR } from './SignUpElements'
 
 const SignUp = () => {
     const history = useHistory();
@@ -33,27 +33,26 @@ const SignUp = () => {
 		console.log(formData);
 
 		axiosInstance
-			.post(`accounts/users/create/`, {
+			.post('accounts/users/create/', {
 				email: formData.email,
 				user_name: formData.username,
 				password: formData.password,
 			})
 			.then( res => {
-                console.log('res')
-                history.push('/');
+                console.log('res', res)
+                // history.push('/');
 			})
-            .catch((error) =>{
+            .catch( error =>{
                 console.log('error', error.response.data)
             });
 	};
     return (
         <>
-             <Container>
-                 <FormWrap>
-                     <Icon to="/"><img src={logo} alt="logo"></img></Icon>
+                <Container style={{ background: "linear-gradient(108deg, rgba(0,0,0,1)0% , rgba(220, 161, 255, 1)100%)" }}> 
+                <Icon to="/"><img src={logo} alt="logo" ></img></Icon>
+                <FormWrap>
                     <FormContent>
                         <Form >
-                            
                             <FormH1>Sign in to your account</FormH1>
                             <FormLabel htmlFor='for'>User Name</FormLabel>
                             <FormInput type="text" required name="username" onChange={handleChange}/>

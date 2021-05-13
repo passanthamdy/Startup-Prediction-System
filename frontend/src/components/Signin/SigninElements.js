@@ -40,10 +40,10 @@ font-size: 32px;
 `
 
 export const FormContent = styled.div`
-height: 100%;
-display: flex;
-flex-direction: column;
-justify-content: center;
+ height: 750px;
+//display: flex;
+//flex-direction: column;
+//justify-content: center;
 
 @media screen and (max-width: 480px){
     padding: 10px;
@@ -52,7 +52,7 @@ justify-content: center;
 export const Form = styled.form`
 background: #010101;
 max-width: 400px;
-height: auto;
+//height: auto;
 width: 100%;
 z-index: 1;
 display: grid;

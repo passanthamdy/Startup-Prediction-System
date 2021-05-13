@@ -3,7 +3,8 @@ import axiosInstance from '../../axiosInstance';
 import { useHistory } from 'react-router-dom';
 //matrial
 import logo from '../../images/logo.png'
-import { Container, Form, FormButton, FormContent, FormH1, FormInput, FormLabel, FormWrap, Icon, Text, TextR } from './SigninElements'
+import Container from 'react-bootstrap/Container'
+import { Form, FormButton, FormContent, FormH1, FormInput, FormLabel, FormWrap, Icon, Text, TextR } from './SigninElements'
 
 
 const SignIn = () => {
@@ -47,8 +48,7 @@ const SignIn = () => {
 
     return (
         <>
-             <Container>
-                 <FormWrap>
+             <Container style={{ background: "linear-gradient(108deg, rgba(0,0,0,1)0% , rgba(220, 161, 255, 1)100%)" , height:"100%"}}>  
                  <Icon to="/"><img src={logo} alt="logo"></img></Icon>
                     <FormContent>
                         <Form >
@@ -61,7 +61,6 @@ const SignIn = () => {
                             <Text>Dont have an account ?<TextR to="/signup">Sign up</TextR></Text>
                         </Form>
                     </FormContent>
-                 </FormWrap>
              </Container>
         </>
     )
