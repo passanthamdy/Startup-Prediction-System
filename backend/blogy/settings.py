@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'django_summernote',
+    'message_control',
     
 ]
 
