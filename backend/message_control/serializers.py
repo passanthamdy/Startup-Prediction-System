@@ -1,10 +1,6 @@
 from rest_framework import serializers
 from .models import  Message
 
-
-
-
-
 class MessageSerializer(serializers.ModelSerializer):
     sender = serializers.SerializerMethodField("get_sender_data")
     sender_id = serializers.IntegerField(write_only=True)
