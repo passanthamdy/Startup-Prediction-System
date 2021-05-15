@@ -1,73 +1,116 @@
-import React, { useState } from 'react';
-import axiosInstance from '../../axiosInstance';
-import { useHistory } from 'react-router-dom';
-import Container from 'react-bootstrap/Container'
+import React, { useState } from "react";
+import axiosInstance from "../../axiosInstance";
+import { useHistory } from "react-router-dom";
+import { useFormik } from "formik";
+import Container from "react-bootstrap/Container";
+import validate from "./validation";
+//matrial
+import logo from "../../images/logo.png";
+import {
+  Form,
+  FormButton,
+  FormContent,
+  FormH1,
+  FormInput,
+  FormLabel,
+  FormWrap,
+  Icon,
+  Text,
+  TextR,
+} from "./SignUpElements";
 
-//matrial 
-import logo from '../../images/logo.png'
-import {  Form, FormButton, FormContent, FormH1, FormInput, FormLabel, FormWrap, Icon, Text, TextR } from './SignUpElements'
+const initialValues = {
+  email: "",
+  username: "",
+  password: "",
+};
 
 const SignUp = () => {
-    const history = useHistory();
+  const history = useHistory();
+  const onSubmit = (values) => {
+    console.log(values);
+    axiosInstance
+      .post("accounts/users/create/", {
+        email: values.email,
+        user_name: values.username,
+        password: values.password,
+      })
+      .then((res) => {
+        console.log("res", res);
+        history.push("/");
+      })
+      .catch((error) => {
+        console.log("error", error.response.data);
+      });
+  };
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+    validate,
+  });
 
-    //A frozen object can no longer be changed
-	const initialFormData = Object.freeze({
-		email: '',
-		username: '',
-		password: '',
-	});
+  
+  return (
+    <>
+      <Container
+        style={{
+          background:
+            "linear-gradient(108deg, rgba(0,0,0,1)0% , rgba(220, 161, 255, 1)100%)",
+        }}
+      >
+        <Icon to="/">
+          <img src={logo} alt="logo"></img>
+        </Icon>
+        <FormWrap>
+          <FormContent>
+            <Form onSubmit={formik.handleSubmit}>
+              <FormH1>Sign in to your account</FormH1>
+              <FormLabel htmlFor="for">User Name</FormLabel>
+              <FormInput
+                type="text"
+                name="username"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.username}
+              />
+              {formik.touched.username && formik.errors.username ? (
+                <div className="error">{formik.errors.username}</div>
+              ) : null}
+              <FormLabel htmlFor="for">Email</FormLabel>
+              <FormInput
+                type="email"
+                name="email"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
+              />
+              {formik.touched.email && formik.errors.email ? (
+                <div className="error">{formik.errors.email}</div>
+              ) : null}
 
-    const [formData, setFormData] = useState(initialFormData);
+              <FormLabel htmlFor="for">Password</FormLabel>
+              <FormInput
+                type="password"
+                name="password"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.password}
+              />
+              {formik.touched.password && formik.errors.password ? (
+                <div className="error">{formik.errors.password}</div>
+              ) : null}
 
-	const handleChange = (e) => {
-		setFormData({
-			...formData,
-			// Trimming any whitespace
-			[e.target.name]: e.target.value.trim(),
-		});
-	};
-    
+              <FormButton type="submit">Continue</FormButton>
+              <br />
+              <Text>
+                ALready have an account ?<TextR to="/signin">Sign in</TextR>
+              </Text>
+            </Form>
+          </FormContent>
+        </FormWrap>
+      </Container>
+    </>
+  );
+};
 
-    const handleSubmit = (e) => {
-		e.preventDefault();
-		console.log(formData);
-
-		axiosInstance
-			.post('accounts/users/create/', {
-				email: formData.email,
-				user_name: formData.username,
-				password: formData.password,
-			})
-			.then( res => {
-                console.log('res', res)
-                // history.push('/');
-			})
-            .catch( error =>{
-                console.log('error', error.response.data)
-            });
-	};
-    return (
-        <>
-                <Container style={{ background: "linear-gradient(108deg, rgba(0,0,0,1)0% , rgba(220, 161, 255, 1)100%)" }}> 
-                <Icon to="/"><img src={logo} alt="logo" ></img></Icon>
-                <FormWrap>
-                    <FormContent>
-                        <Form >
-                            <FormH1>Sign in to your account</FormH1>
-                            <FormLabel htmlFor='for'>User Name</FormLabel>
-                            <FormInput type="text" required name="username" onChange={handleChange}/>
-                            <FormLabel htmlFor='for'>Email</FormLabel>
-                            <FormInput type="email" name="email" required onChange={handleChange} />
-                            <FormLabel htmlFor='for'>Password</FormLabel>
-                            <FormInput type="password" required name="password" onChange={handleChange}/>
-                            <FormButton type='submit' onClick={handleSubmit}>Continue</FormButton><br/>
-                            <Text>ALready have an account ?<TextR to="/signin">Sign in</TextR></Text>
-                        </Form>
-                    </FormContent>
-                 </FormWrap>
-             </Container>
-        </>
-    )
-}
-
-export default SignUp
+export default SignUp;
