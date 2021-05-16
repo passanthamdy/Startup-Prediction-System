@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 from .models import UserProfile
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
+from rest_framework_simplejwt.tokens import RefreshToken
 
 # Create your views here.
 
@@ -34,6 +35,20 @@ class UserProfileView(ModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
     permission_classes = (IsAuthenticated, )
+
+
+class BlacklistTokenUpdateView(APIView):
+    permission_classes=(permissions.AllowAny ,)
+    
+    def post(self, request):
+        try:
+            refresh_token = request.data["refresh_token"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+            return Response(status=status.HTTP_205_RESET_CONTENT)
+        except Exception as e:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
 
 class HelloWorldView(APIView):
 
