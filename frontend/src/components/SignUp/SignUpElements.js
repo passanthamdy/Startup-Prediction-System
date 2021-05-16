@@ -120,3 +120,9 @@ color: #fff;
 font-size: 14px;
 
 `
+
+export const Error = styled.div`
+color:red;
+margin-top:5px;
+padding-bottom:20px;
+`

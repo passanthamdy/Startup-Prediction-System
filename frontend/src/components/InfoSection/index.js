@@ -41,9 +41,9 @@ const InfoSection = ({lightBg,
                          <Subtitle darkText={darkText}>{description}</Subtitle>
                          <BtnWrap>
                              <ButtonR to="signup"
-                             smooth={true}
+                             smooth={1}
                              duration={500}
-                             spy={true}
+                             spy={1}
                              exact="true"
                              offset={-80}
                              primary={primary ? 1 : 0}

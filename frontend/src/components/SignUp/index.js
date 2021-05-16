@@ -17,6 +17,7 @@ import {
   Icon,
   Text,
   TextR,
+  Error,
 } from "./SignUpElements";
 
 const initialValues = {
@@ -74,7 +75,7 @@ const SignUp = () => {
                 value={formik.values.username}
               />
               {formik.touched.username && formik.errors.username ? (
-                <div className="error">{formik.errors.username}</div>
+                <Error className="error">{formik.errors.username}</Error>
               ) : null}
               <FormLabel htmlFor="for">Email</FormLabel>
               <FormInput
@@ -85,7 +86,7 @@ const SignUp = () => {
                 value={formik.values.email}
               />
               {formik.touched.email && formik.errors.email ? (
-                <div className="error">{formik.errors.email}</div>
+                <Error className="error">{formik.errors.email}</Error>
               ) : null}
 
               <FormLabel htmlFor="for">Password</FormLabel>
@@ -97,7 +98,7 @@ const SignUp = () => {
                 value={formik.values.password}
               />
               {formik.touched.password && formik.errors.password ? (
-                <div className="error">{formik.errors.password}</div>
+                <Error className="error">{formik.errors.password}</Error>
               ) : null}
 
               <FormButton type="submit">Continue</FormButton>
