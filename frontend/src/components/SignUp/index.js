@@ -43,10 +43,13 @@ const SignUp = () => {
         history.push("/");
       })
       .catch((error) => {
+        try{
         if (error.response.data.email) setEmailError(error.response.data.email);
-        if (error.response.data.user_name)
-          setUserNameError(error.response.data.user_name);
-        console.log("error", error.response.data);
+        if (error.response.data.user_name) setUserNameError(error.response.data.user_name);
+        }
+        catch{
+        console.log("error", error);
+        }
       });
   };
   const formik = useFormik({
@@ -92,8 +95,7 @@ const SignUp = () => {
                 value={formik.values.username}
               />
               {formik.touched.username &&
-              formik.errors.username &&
-              formik.values.username.length > 0 ? (
+              formik.errors.username ? (
                 <Error className="error">{formik.errors.username}</Error>
               ) : null}
               <FormLabel htmlFor="for">Email</FormLabel>
@@ -105,8 +107,7 @@ const SignUp = () => {
                 value={formik.values.email}
               />
               {formik.touched.email &&
-              formik.errors.email &&
-              formik.values.email.length > 0 ? (
+              formik.errors.email ? (
                 <Error className="error">{formik.errors.email}</Error>
               ) : null}
 
@@ -119,8 +120,7 @@ const SignUp = () => {
                 value={formik.values.password}
               />
               {formik.touched.password &&
-              formik.errors.password &&
-              formik.values.password.length > 0 ? (
+              formik.errors.password ? (
                 <Error className="error">{formik.errors.password}</Error>
               ) : null}
 

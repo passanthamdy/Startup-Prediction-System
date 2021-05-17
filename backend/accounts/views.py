@@ -49,6 +49,18 @@ class BlacklistTokenUpdateView(APIView):
         except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
+class CheckEmailExisting(APIView):
+    permission_classes=(permissions.AllowAny ,)
+
+    def post(self,request ,format='json'):
+        data=request.data
+        email=data['email']
+        print(email)
+        queryset = CustomUser.objects.filter(email=email)
+        
+        if queryset.exists() :
+            return Response("Email already Exist", status=status.HTTP_400_BAD_REQUEST)
+        return Response("ok", status=status.HTTP_201_CREATED)
 
 class HelloWorldView(APIView):
 
