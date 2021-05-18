@@ -24,14 +24,17 @@ const initialValues = {
   email: "",
   username: "",
   password: "",
+  
 };
 
 const SignUp = () => {
-  const [emailError, setEmailError] = useState([]);
+  const [emailError, setEmailError] = useState(false);
+  const [emailErrorState, setEmailErrorState] = useState([]);
   const [userNameError, setUserNameError] = useState([]);
   const history = useHistory();
   const onSubmit = (values) => {
-    console.log(values);
+    
+    if(emailError){
     axiosInstance
       .post("accounts/users/create/", {
         email: values.email,
@@ -44,13 +47,14 @@ const SignUp = () => {
       })
       .catch((error) => {
         try{
-        if (error.response.data.email) setEmailError(error.response.data.email);
+        
         if (error.response.data.user_name) setUserNameError(error.response.data.user_name);
         }
         catch{
         console.log("error", error);
         }
       });
+    }
   };
   const formik = useFormik({
     initialValues,
@@ -59,11 +63,32 @@ const SignUp = () => {
   });
 
   useEffect(() => {
-    //check email
+    const sendPostRequest = setTimeout(() => {
+      try {
+          const resp =  axiosInstance.post('accounts/sign_up/email/',{
+            email:formik.values.email
+          }).then((res) => {
+            //formik.setSubmitting(true);
+            setEmailError(true);
+          }).catch((error)=>{
+              
+            if (error.response.data){ 
+              setEmailErrorState(error.response.data)
+              console.log(error.response.data); 
+              setEmailError(false);}
+          });
+          
+      } catch (err) {
+          // Handle Error Here
+        console.log(err.response)
+      }
+  },1000)
+    
+  return () => clearTimeout(sendPostRequest)
   }, [formik.values.email]);
 
   useEffect(() => {
-    //check username
+    console.log("username 2")
   }, [formik.values.username]);
   return (
     <>
@@ -80,8 +105,8 @@ const SignUp = () => {
           <FormContent>
             <Form onSubmit={formik.handleSubmit}>
               <FormH1>Sign up your account</FormH1>
-              {emailError.length > 0 && !formik.errors.email ? (
-                <Error>{emailError}</Error>
+              {!emailError && !formik.errors.email ? (
+                <Error>{emailErrorState}</Error>
               ) : null}
               {userNameError.length > 0 && !formik.errors.username ? (
                 <Error>{userNameError}</Error>
