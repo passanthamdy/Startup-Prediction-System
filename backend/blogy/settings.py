@@ -43,11 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'rest_framework',
+    'django_filters',
     'corsheaders',
     'django_summernote',
     'message_control',
     'rest_framework_simplejwt.token_blacklist',
-    
+    'posts',
 ]
 
 MIDDLEWARE = [
