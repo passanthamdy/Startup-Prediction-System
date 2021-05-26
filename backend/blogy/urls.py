@@ -10,7 +10,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/accounts/', include('accounts.urls')),
     path('summernote/', include('django_summernote.urls')),
-    path('api/', include('posts.urls')),
+    path('api/posts/', include('posts.urls')),
     
 
 
