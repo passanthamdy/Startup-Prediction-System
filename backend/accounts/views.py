@@ -10,7 +10,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import CustomUser
+from django.http import JsonResponse
 
+from rest_framework import mixins, permissions, generics
 # Create your views here.
 
 class ObtainTokenPairWithColorView(TokenObtainPairView):
@@ -67,5 +69,6 @@ class HelloWorldView(APIView):
 
     def get(self, request):
         return Response(data={"hello":"world"}, status=status.HTTP_200_OK)
+
 
 

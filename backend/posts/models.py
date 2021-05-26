@@ -3,6 +3,8 @@ from django.utils import timezone
 from django.template.defaultfilters import slugify
 import string
 import random
+from location_field.models.plain import PlainLocationField
+from django.contrib.postgres.fields import ArrayField
 
 def rand_slug():
     return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(6))
@@ -17,9 +19,9 @@ class Category(models.Model):
 
 
 
+
 class Post(models.Model):
     user = models.ForeignKey("accounts.CustomUser", related_name="user", on_delete=models.CASCADE)
-    category= models.ForeignKey(Category, related_name='category', on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     content = models.TextField()
     excerpt = models.TextField()
@@ -49,4 +51,13 @@ class Comment(models.Model):
     
     def __str__(self):
         return self.content
+
+
+class Dataset(models.Model):
+    post = models.ForeignKey(Post , related_name= 'post', on_delete=models.CASCADE)
+    category= models.ForeignKey(Category, related_name='category', on_delete=models.CASCADE, null = True)
+    location = models.CharField( max_length=50)
+    fund = models.IntegerField()
+    fund_round = models.IntegerField()
+
 

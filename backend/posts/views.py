@@ -16,12 +16,13 @@ class CategoryCreateView(generics.ListCreateAPIView):
 
 #after applying machine learning it would be only list View, 
 #dont forget to remove allowany permission
-class PostListView(generics.ListCreateAPIView):
+#DONE
+class PostListView(generics.ListAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     filter_backends = [filters.OrderingFilter]
-    ordering_fields = ['featured']
-    permission_classes = [AllowAny]
+    ordering_fields = ['created_at']
+    #permission_classes = [AllowAny]
 
     
 #dont forget to remove allowany permission
@@ -29,4 +30,14 @@ class PostDetailView(generics.RetrieveAPIView):
     queryset = Post.objects.order_by('-created_at')
     serializer_class = PostSerializer
     lookup_field = 'slug'
-    permission_classes = [AllowAny]
+    #permission_classes = [AllowAny]
+
+class UserPosts(generics.ListAPIView):
+    serializer_class = PostSerializer
+    def get_queryset(self):
+        user = self.request.user
+        queryset = Post.objects.filter(user=user)
+        return queryset
+
+    
+

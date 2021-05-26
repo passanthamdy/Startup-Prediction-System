@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'message_control',
     'rest_framework_simplejwt.token_blacklist',
     'posts',
+    'location_field.apps.DefaultConfig',
 ]
 
 MIDDLEWARE = [
