@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from .models import Post, Category
 from .serializers import PostSerializer, CategorySerializer
 from rest_framework import generics
 from rest_framework import filters
 from rest_framework.permissions import AllowAny
+from rest_framework.authtoken.views import APIView
+from rest_framework.response import Response
 
 #from django_filters.rest_framework import DjangoFilterBackend
 #next update >> APIVIEW instead of generics
@@ -39,5 +41,27 @@ class UserPosts(generics.ListAPIView):
         queryset = Post.objects.filter(user=user)
         return queryset
 
-    
+class PostLike(APIView):
 
+    def get(self, request, slug = None, format=None):
+        obj = get_object_or_404(Post, slug=slug)
+        url_ = obj.get_abslute_url()
+        user = self.request.user
+        updated = False
+        liked = False
+        if user.is_authnticated():
+            if user in obj.likes.all():
+                liked = False
+                obj.likes.remove(user)
+            else :
+                liked= True
+                obj.likes.add(user)
+            updated= True
+            data ={
+                "updated": updated,
+                "liked": liked
+            }
+
+        
+
+        return Response(data)

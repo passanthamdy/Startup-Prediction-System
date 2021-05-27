@@ -26,6 +26,7 @@ class Post(models.Model):
     content = models.TextField()
     excerpt = models.TextField()
     slug = models.SlugField(max_length=200,null=False, blank= True, unique=True)
+    likes = models.ManyToManyField("accounts.CustomUser", related_name= 'likes')
     featured = models.BooleanField(default = False)
     created_at = models.DateTimeField( default= timezone.now)
 
@@ -56,8 +57,9 @@ class Comment(models.Model):
 class Dataset(models.Model):
     post = models.ForeignKey(Post , related_name= 'post', on_delete=models.CASCADE)
     category= models.ForeignKey(Category, related_name='category', on_delete=models.CASCADE, null = True)
-    location = models.CharField( max_length=50)
-    fund = models.IntegerField()
+    country = models.CharField( max_length=50)
+    state = models.CharField( max_length=50)
+    fund = models.FloatField()
     fund_round = models.IntegerField()
 
 
