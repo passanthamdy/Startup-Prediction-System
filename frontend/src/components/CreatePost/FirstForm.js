@@ -8,6 +8,15 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import clsx from 'clsx';
+import IconButton from '@material-ui/core/IconButton';
+import Input from '@material-ui/core/Input';
+import FilledInput from '@material-ui/core/FilledInput';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(0),
@@ -17,8 +26,19 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   root: {
+    display: 'flex',
+    flexWrap: 'wrap',
     '& > *': {
       margin: theme.spacing(1),
+    },
+    margin: {
+      margin: theme.spacing(1),
+    },
+    withoutLabel: {
+      marginTop: theme.spacing(3),
+    },
+    textField: {
+      width: '25ch',
     },
   },
   input: {
@@ -28,6 +48,13 @@ const useStyles = makeStyles((theme) => ({
 export default function FirstForm() {
   const classes = useStyles();
   const [Category, setCategory] = React.useState('');
+  const [values, setValues] = React.useState({
+    amount: '',
+    password: '',
+    weight: '',
+    weightRange: '',
+    showPassword: false,
+  });
 
   const handleChange = (event) => {
     setCategory(event.target.value);
@@ -62,6 +89,15 @@ export default function FirstForm() {
           <MenuItem value={30}>Life insurance</MenuItem>
         </Select>
       </FormControl>
+        </Grid>
+        <Grid item xs={12}>
+        <FormControl fullWidth className={classes.margin}>
+          <InputLabel htmlFor="standard-adornment-amount">Fund</InputLabel>
+          <Input
+            id="standard-adornment-amount"
+            startAdornment={<InputAdornment position="start">$</InputAdornment>}
+          />
+        </FormControl>
         </Grid>
         
         
