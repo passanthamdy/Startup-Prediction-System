@@ -13,8 +13,6 @@ import Typography from '@material-ui/core/Typography';
 import FirstForm from './FirstForm';
 import DescForm from './DescForm';
 
-
-
 const useStyles = makeStyles((theme) => ({
   appBar: {
     position: 'relative',
