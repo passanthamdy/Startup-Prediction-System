@@ -45,7 +45,7 @@ const Footer = () => {
                         <FooterLinksItems>
                             <FooterLinkTitle>Startups</FooterLinkTitle>
                                 
-                                <FooterLink to="/posts">Post a startup</FooterLink>
+                                <FooterLink to="/add">Post a startup</FooterLink>
                                 <FooterLink to="/posts">All startups</FooterLink>
                                 <FooterLink to="/investors">All investors</FooterLink>
                                 

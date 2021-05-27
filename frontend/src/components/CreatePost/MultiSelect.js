@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { MultiSelect } from "@progress/kendo-react-dropdowns";
 
-const sports = [
+const Cat = [
   "Baseball",
   "Basketball",
   "Cricket",
@@ -28,7 +28,7 @@ class Multiselect extends React.Component {
         <div>
           <div>Favorite sports:</div>
           <MultiSelect
-            data={sports}
+            data={Cat}
             onChange={this.onChange}
             value={this.state.value}
           />

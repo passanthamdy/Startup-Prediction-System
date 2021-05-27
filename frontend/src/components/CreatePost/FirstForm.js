@@ -3,10 +3,35 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Multiselect from './MultiSelect'
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(0),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+  input: {
+    display: 'none',
+  },
+}));
 export default function FirstForm() {
+  const classes = useStyles();
+  const [Category, setCategory] = React.useState('');
+
+  const handleChange = (event) => {
+    setCategory(event.target.value);
+  };
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -20,12 +45,25 @@ export default function FirstForm() {
             name="Name"
             label="name"
             fullWidth
-            autoComplete="given-name"
+            
           />
         </Grid>
-        <Grid>
-            
+        <Grid item xs={12}>
+        <FormControl className={classes.formControl}>
+        <InputLabel id="demo-simple-select-label">Category</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={Category}
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Media</MenuItem>
+          <MenuItem value={20}>Ad</MenuItem>
+          <MenuItem value={30}>Life insurance</MenuItem>
+        </Select>
+      </FormControl>
         </Grid>
+        
         
         <Grid item xs={12} sm={6}>
           <TextField
@@ -34,22 +72,13 @@ export default function FirstForm() {
             name="city"
             label="City"
             fullWidth
-            autoComplete="shipping address-level2"
+            
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField id="state" name="state" label="State/Province/Region" fullWidth />
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="zip"
-            name="zip"
-            label="Zip / Postal code"
-            fullWidth
-            autoComplete="shipping postal-code"
-          />
-        </Grid>
+        
         <Grid item xs={12} sm={6}>
           <TextField
             required
@@ -57,7 +86,7 @@ export default function FirstForm() {
             name="country"
             label="Country"
             fullWidth
-            autoComplete="shipping country"
+            
           />
         </Grid>
         
