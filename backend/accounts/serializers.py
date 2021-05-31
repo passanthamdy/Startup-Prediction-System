@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .models import CustomUser, UserProfile
-
+import re
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -10,9 +10,25 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def get_token(cls, user):
         token = super(MyTokenObtainPairSerializer, cls).get_token(user)
         
-        # Add custom claims
+        #  custom claims
         token['user_name'] = user.user_name
         return token
+
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        refresh = self.get_token(self.user)
+        data['refresh'] = str(refresh)
+        data['access'] = str(refresh.access_token)
+
+        # extra responses here
+        data['id']=self.user.id
+        data['email'] = self.user.email
+        s=self.user.user_name
+        s = re.sub('\s+', '', s)
+        data['username'] = s
+        
+        
+        return data
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
