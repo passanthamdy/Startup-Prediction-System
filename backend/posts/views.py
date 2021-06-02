@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 from .models import Post, Category
-from .serializers import PostSerializer, CategorySerializer
+from .serializers import PostSerializer 
+from profiles.serializer import ProfileSerializer
 from rest_framework import generics
 from rest_framework import filters
 from rest_framework.permissions import AllowAny
@@ -10,10 +11,10 @@ from rest_framework.response import Response
 #from django_filters.rest_framework import DjangoFilterBackend
 #next update >> APIVIEW instead of generics
 #dont forget to remove allowany permission
-class CategoryCreateView(generics.ListCreateAPIView):
-    queryset  = Category.objects.all()
-    serializer_class = CategorySerializer
-    permission_classes = [AllowAny]
+# class CategoryCreateView(generics.ListCreateAPIView):
+#     queryset  = Category.objects.all()
+#     serializer_class = CategorySerializer
+#     permission_classes = [AllowAny]
 
 
 #after applying machine learning it would be only list View, 
@@ -28,18 +29,12 @@ class PostListView(generics.ListAPIView):
 
     
 #dont forget to remove allowany permission
-class PostDetailView(generics.RetrieveAPIView):
+class PostDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.order_by('-created_at')
     serializer_class = PostSerializer
-    lookup_field = 'slug'
+    lookup_field = 'id'
     #permission_classes = [AllowAny]
 
-class UserPosts(generics.ListAPIView):
-    serializer_class = PostSerializer
-    def get_queryset(self):
-        user = self.request.user
-        queryset = Post.objects.filter(user=user)
-        return queryset
 
 class PostLike(APIView):
 

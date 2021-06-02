@@ -9,6 +9,9 @@ from django.contrib.postgres.fields import ArrayField
 def rand_slug():
     return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(6))
 
+def upload_to(instance, filename):
+    return 'posts/{filename}'.format(filename=filename)
+
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
@@ -25,8 +28,9 @@ class Post(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
     excerpt = models.TextField()
+    image = models.ImageField( upload_to=upload_to, default = 'def.png')
     slug = models.SlugField(max_length=200,null=False, blank= True, unique=True)
-    likes = models.ManyToManyField("accounts.CustomUser", related_name= 'likes')
+    likes = models.ManyToManyField("accounts.CustomUser", related_name= 'likes', blank=True)
     featured = models.BooleanField(default = False)
     created_at = models.DateTimeField( default= timezone.now)
 

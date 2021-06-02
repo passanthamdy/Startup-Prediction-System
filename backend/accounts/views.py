@@ -1,11 +1,10 @@
 from django.shortcuts import render
 from rest_framework_simplejwt.views import TokenObtainPairView 
-from .serializers import CustomUserSerializer, UserProfileSerializer
+from .serializers import CustomUserSerializer
 from rest_framework import permissions,status
 from rest_framework.response import Response
 from .serializers import MyTokenObtainPairSerializer
 from rest_framework.views import APIView
-from .models import UserProfile
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -34,10 +33,6 @@ class CreateCustomUser(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class UserProfileView(ModelViewSet):
-    queryset = UserProfile.objects.all()
-    serializer_class = UserProfileSerializer
-    permission_classes = (IsAuthenticated, )
 
 
 class BlacklistTokenUpdateView(APIView):
@@ -71,4 +66,5 @@ class HelloWorldView(APIView):
         return Response(data={"hello":"world"}, status=status.HTTP_200_OK)
 
 
+   
 

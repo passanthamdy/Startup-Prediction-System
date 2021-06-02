@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'message_control',
     'rest_framework_simplejwt.token_blacklist',
     'posts',
+    'profiles',
     'location_field.apps.DefaultConfig',
 ]
 
@@ -90,7 +91,7 @@ WSGI_APPLICATION = 'blogy.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'sps',
+        'NAME': 'sups',
         'USER':'postgres',
         'PASSWORD':'password',
         'HOST': 'localhost',
@@ -141,7 +142,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=2),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=14),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,

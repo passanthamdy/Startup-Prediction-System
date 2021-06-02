@@ -1,10 +1,10 @@
 from django.urls import path,include
 from rest_framework_simplejwt import views as jwt_views
-from .views import ObtainTokenPairWithColorView ,CreateCustomUser,HelloWorldView,UserProfileView,CheckEmailExisting
+from .views import ObtainTokenPairWithColorView ,CreateCustomUser,HelloWorldView,CheckEmailExisting
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter(trailing_slash=False)
-router.register("profile", UserProfileView)
+#router.register("profile", UserProfileView)
 
 urlpatterns = [
     path('', include(router.urls)),

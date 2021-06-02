@@ -3,7 +3,6 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
-
 class CustomAccountManager(BaseUserManager):
 
     def create_superuser(self, email, user_name, password, **other_fields):
@@ -49,18 +48,3 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.user_name
-
-class UserProfile(models.Model):
-    user = models.OneToOneField(CustomUser, related_name="user_profile", on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    caption = models.CharField(max_length=250)
-    about = models.TextField(max_length=500, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.user.user_name
-
-    class Meta:
-        ordering = ("created_at",)
