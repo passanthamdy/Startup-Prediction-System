@@ -2,9 +2,9 @@ import React, {useState} from 'react'
 import ScrollToTop from '../components/ScrollToTop';
 import SubNavbar from '../components/SubNav';
 import SubSide from '../components/SubSide'
-import {Button} from '../components/ButtonElements'
+import Checkout from '../components/CreatePost'
 
-const PostsPage = () => {
+const AddPostsPage = () => {
     const[isOpen, setIsOpen] = useState(false);
 
     const toggle = () => {
@@ -15,11 +15,9 @@ const PostsPage = () => {
           <ScrollToTop />
           <SubNavbar toggle={toggle}/>
           <SubSide isOpen = {isOpen} toggle= {toggle}/>
-          <br />
-        
-          
+          <Checkout />
         </>
     )
 }
 
-export default PostsPage
+export default AddPostsPage

@@ -6,6 +6,7 @@ import SignupPage from './pages/signup';
 import PostsPage from './pages/posts';
 import InvestorsPage from './pages/investors';
 import Navbar from './components/NavBar';
+import AddPostsPage from './pages/addpost';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/signup" component={SignupPage} exact/>
         <Route path="/posts" component={PostsPage} exact/>
         <Route path="/investors" component={InvestorsPage} exact/>
+        <Route path="/add" component={AddPostsPage} exact/>
       </Switch>
     </Router>
     
