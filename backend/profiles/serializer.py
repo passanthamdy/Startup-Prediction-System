@@ -1,8 +1,10 @@
 from rest_framework import serializers
 from .models import Profile
+#from posts.serializers import PostSerializer
+
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = '__all__'
-
+        
+        exclude = ['created_at']
