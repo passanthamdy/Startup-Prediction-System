@@ -1,10 +1,10 @@
-# from django.urls import path
-# from .views import UserProfile
+from django.urls import path
+from .views import UpdateUserProfile, UserPostsView
 
-
-# urlpatterns = [
+urlpatterns = [
     
-#     path('profile/', UserProfile),
+    path('<int:id>/', UpdateUserProfile.as_view()),
+    path('posts/<int:user>/', UserPostsView.as_view()),
 
 
-# ]
+]

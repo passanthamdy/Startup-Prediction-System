@@ -1,8 +1,12 @@
 from django.shortcuts import render
 from rest_framework import generics
-from accounts.models import CustomUser
-#from .serializer import UserProfileSerlialier
-
+from .models import Profile
+from posts.serializers import PostSerializer
+from posts.models import Post
+from .serializer import ProfileSerializer
+from rest_framework import views
+from rest_framework.response import Response
+from rest_framework.status import HTTP_200_OK
 
 
 # # @api_view(['GET'])
@@ -19,3 +23,16 @@ from accounts.models import CustomUser
 #     serializer_class = UserProfileSerlialier
 #     def get_queryset(self):
 #         return  CustomUser.select_related('profile').prefetch_related("posts").get(username=self.username)
+
+
+class UpdateUserProfile(generics.RetrieveUpdateAPIView):
+    queryset = Profile.objects.order_by('-created_at')
+    serializer_class = ProfileSerializer
+    lookup_field = 'id'
+
+class UserPostsView(generics.ListAPIView):
+    serializer_class= PostSerializer
+    def get_queryset(self):
+        qs = Post.objects.filter(user=self.kwargs['user'])
+        return qs
+
