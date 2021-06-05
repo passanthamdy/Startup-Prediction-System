@@ -62,11 +62,14 @@ class Comment(models.Model):
 
 
 class Dataset(models.Model):
-    post = models.ForeignKey(Post , related_name= 'post', on_delete=models.CASCADE)
-    category= models.ForeignKey(Category, related_name='category', on_delete=models.CASCADE, null = True)
-    country = models.CharField( max_length=50)
-    state = models.CharField( max_length=50)
-    fund = models.FloatField()
-    fund_round = models.IntegerField()
+    user = models.ForeignKey("accounts.CustomUser" , on_delete=models.CASCADE)
+    category_list= models.CharField( max_length=50)
+    country_code = models.CharField( max_length=50)
+    funding_total_usd = models.FloatField()
+    funding_rounds = models.IntegerField()
+    score=models.FloatField()
+    maxfund=models.FloatField()
+    minfund=models.FloatField()
+    status=models.BooleanField()
 
 
