@@ -1,12 +1,12 @@
 from rest_framework import serializers
-from .models import Post
+from .models import Post,Dataset
 from profiles.serializer import ProfileSerializer
 from accounts.serializers import CustomUserSerializer
 
 
 class DatasetSerializer(serializers.ModelSerializer):
     class Meta:
-        model=Post
+        model=Dataset 
         fields= '__all__'
 
 
@@ -20,14 +20,13 @@ class CreatePostSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
     user = ProfileSerializer(source='user.profile', read_only=True)
+    dataset= DatasetSerializer()
     total_likes = serializers.SerializerMethodField()
     likes= CustomUserSerializer(many=True)
     class Meta:
-        model =  Post
+        model =  Post 
         exclude = ['slug', 'featured']
         lookup_field= 'id'
     def get_total_likes(self,obj):
         return obj.likes.count()
    
-
-    

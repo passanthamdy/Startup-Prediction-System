@@ -7,7 +7,7 @@ from .serializer import ProfileSerializer
 from rest_framework import views
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK
-
+from rest_framework.decorators import api_view
 
 # # @api_view(['GET'])
 # # def UserProfile(request):
@@ -35,4 +35,5 @@ class UserPostsView(generics.ListAPIView):
     def get_queryset(self):
         qs = Post.objects.filter(user=self.kwargs['user'])
         return qs
+
 

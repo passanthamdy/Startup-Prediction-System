@@ -4,6 +4,9 @@ from django.template.defaultfilters import slugify
 import string
 import random
 from django.contrib.postgres.fields import ArrayField
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 
 def rand_slug():
     return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(6))
@@ -52,4 +55,10 @@ class Dataset(models.Model):
     minfund=models.FloatField()
     status=models.BooleanField()
 
+"""the signals that to every post one dataset model in database """
 
+# @receiver(post_save, sender=Post)
+# def create_or_update_post(sender, instance, created, **kwargs):
+#     if created:
+#         Dataset.objects.create(post=instance)
+#     instance.dataset.save()

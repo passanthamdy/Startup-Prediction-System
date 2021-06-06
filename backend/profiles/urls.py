@@ -3,7 +3,7 @@ from .views import UpdateUserProfile, UserPostsView
 
 urlpatterns = [
     
-    path('<int:id>/', UpdateUserProfile.as_view()),
+    path('update/', UpdateUserProfile),
     path('posts/<int:user>/', UserPostsView.as_view()),
 
 
