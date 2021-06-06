@@ -11,7 +11,6 @@ def upload_to(instance, filename):
 
 class Profile(models.Model):
     user = models.OneToOneField(CustomUser, related_name="profile", on_delete=models.CASCADE)
-    #username = models.CharField( max_length=1001)
     first_name = models.CharField(max_length=100)
     about = models.TextField(max_length=500, blank=True)
     avatar = models.ImageField( upload_to = upload_to,default = 'def.png')
