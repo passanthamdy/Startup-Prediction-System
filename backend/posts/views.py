@@ -1,8 +1,9 @@
 from django.shortcuts import get_object_or_404, render
-from .models import  Post, Category
-from .serializers import PostSerializer ,DatasetSerializer
+from .models import  Post
+from .serializers import PostSerializer , DatasetSerializer, CreatePostSerializer
 from profiles.serializer import ProfileSerializer
 from rest_framework import generics
+from rest_framework import mixins
 from rest_framework import filters
 from rest_framework.permissions import AllowAny
 from rest_framework.authtoken.views import APIView
@@ -15,25 +16,21 @@ model=joblib.load('modelPipeline5.pkl')
 dataset=pd.read_csv('https://raw.githubusercontent.com/AhmadAmr/start-up-prediction-system/main/companiesfinal.csv')
 
 #from django_filters.rest_framework import DjangoFilterBackend
-#next update >> APIVIEW instead of generics
-#dont forget to remove allowany permission
-# class CategoryCreateView(generics.ListCreateAPIView):
-#     queryset  = Category.objects.all()
-#     serializer_class = CategorySerializer
-#     permission_classes = [AllowAny]
 
 
 #after applying machine learning it would be only list View, 
 #dont forget to remove allowany permission
 #DONE
+class CreatePostView(generics.CreateAPIView):
+    query_set= Post.objects.all()
+    serializer_class = CreatePostSerializer
+    
+
 class PostListView(generics.ListAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    filter_backends = [filters.OrderingFilter]
-    ordering_fields = ['created_at']
-    #permission_classes = [AllowAny]
 
-    
+
 #dont forget to remove allowany permission
 class PostDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.order_by('-created_at')
@@ -65,7 +62,7 @@ class PostLike(APIView):
 
         return Response(data)
 
-class AddPost(APIView):
+class AddPostDataset(APIView):
     #permission_classes = [AllowAny]
 
     def post(self, request, slug = None, format='json'):
@@ -78,6 +75,7 @@ class AddPost(APIView):
         final   = country.loc[filt2]
         fail    = dataset.loc[filt2]
         status  = True
+        
         #compute score
         if final.empty :
             score  = model.predict_proba(fail)[:,-1][0]
@@ -90,6 +88,7 @@ class AddPost(APIView):
         data['score']   = score
         data['maxfund'] = final['funding_total_usd'].max()
         data['minfund'] = final['funding_total_usd'].median()
+
         data['status']  = status
         
         serializer = DatasetSerializer(data=data)
@@ -99,4 +98,3 @@ class AddPost(APIView):
            return Response(json_obj, status=statu.HTTP_201_CREATED)
         return Response(serializer.errors, status=statu.HTTP_400_BAD_REQUEST)
 
-        

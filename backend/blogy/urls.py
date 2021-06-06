@@ -9,7 +9,6 @@ from rest_framework.authtoken import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/accounts/', include('accounts.urls')),
-    path('summernote/', include('django_summernote.urls')),
     path('api/posts/', include('posts.urls')),
     path('api/profile/', include('profiles.urls')),
     

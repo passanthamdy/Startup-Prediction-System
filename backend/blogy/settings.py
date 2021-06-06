@@ -49,12 +49,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'corsheaders',
-    'django_summernote',
+    
     'message_control',
     'rest_framework_simplejwt.token_blacklist',
     'posts',
     'profiles',
-    'location_field.apps.DefaultConfig',
+  
 ]
 
 MIDDLEWARE = [
