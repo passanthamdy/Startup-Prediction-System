@@ -9,6 +9,9 @@ from rest_framework.permissions import AllowAny
 from rest_framework.authtoken.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions,status as  statu
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+
 import json
 import pandas as pd
 import joblib
@@ -65,11 +68,12 @@ class PostLike(APIView):
 class AddPostDataset(APIView):
     #permission_classes = [AllowAny]
 
-    def post(self, request, slug = None, format='json'):
+    def post(self, request, slug = None, format='json' ,id=id):
         # User data
         data  = json.loads(request.body)
         dataF = pd.DataFrame({'x':data}).transpose()
-        filt1 = (dataset['country_code'] == data['country_code'])
+        print(dataF)
+        filt1 = (dataset['country_code']  == data['country_code'])
         filt2 = (dataset['category_list'] == data['category_list'])
         country = dataset.loc[filt1]
         final   = country.loc[filt2]
@@ -88,13 +92,15 @@ class AddPostDataset(APIView):
         data['score']   = score
         data['maxfund'] = final['funding_total_usd'].max()
         data['minfund'] = final['funding_total_usd'].median()
-
+        data['post']    =   id
         data['status']  = status
-        
+        print(data)
         serializer = DatasetSerializer(data=data)
         if serializer.is_valid():
            serializer.save()
            json_obj = serializer.data
            return Response(json_obj, status=statu.HTTP_201_CREATED)
         return Response(serializer.errors, status=statu.HTTP_400_BAD_REQUEST)
+    
+    
 
