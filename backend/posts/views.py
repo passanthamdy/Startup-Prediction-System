@@ -46,7 +46,6 @@ class PostLike(APIView):
 
     def get(self, request, id = None, format=None):
         obj = get_object_or_404(Post, id=id)
-        
         user = self.request.user
         updated = False
         liked = False

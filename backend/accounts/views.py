@@ -3,14 +3,14 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from .serializers import CustomUserSerializer
 from rest_framework import permissions,status
 from rest_framework.response import Response
-from .serializers import MyTokenObtainPairSerializer
+from .serializers import MyTokenObtainPairSerializer,ChangePasswordSerializer
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import CustomUser
 from django.http import JsonResponse
-
+from rest_framework.generics import UpdateAPIView
 from rest_framework import mixins, permissions, generics
 # Create your views here.
 
@@ -67,4 +67,12 @@ class HelloWorldView(APIView):
 
 
    
+class ChangePasswordView(UpdateAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = ChangePasswordSerializer
+
+    def get_object(self, queryset=None):
+        obj = self.request.user
+        return obj
+
 
