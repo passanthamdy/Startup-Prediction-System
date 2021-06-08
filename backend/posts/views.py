@@ -67,7 +67,7 @@ class PostLike(APIView):
 class AddPostDataset(APIView):
     #permission_classes = [AllowAny]
 
-    def post(self, request, slug = None, format='json' ,id=id):
+    def post(self, request, slug = None, format='json' ,id=None):
         # User data
         data  = json.loads(request.body)
         dataF = pd.DataFrame({'x':data}).transpose()
