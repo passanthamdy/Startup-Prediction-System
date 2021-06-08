@@ -6,7 +6,7 @@ urlpatterns = [
     path('postcreate/<int:id>/',AddPostDataset.as_view()),#to add dataset to be predicted
     path('list/', PostListView.as_view() ), #to list all posts
     path('list/<int:id>/',  PostDetailView.as_view()), #to get post, update and delete 
-    path('list/<int:id>/like/',  PostLike.as_view()),
+    path('list/like/<int:id>/',  PostLike.as_view()),
      
 
 

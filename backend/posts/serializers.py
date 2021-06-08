@@ -27,6 +27,7 @@ class PostSerializer(serializers.ModelSerializer):
         model =  Post 
         exclude = ['slug', 'featured']
         lookup_field= 'id'
+        readonly_field = ['user','dataset', 'id','likes', 'total_likes']
     def get_total_likes(self,obj):
         return obj.likes.count()
    

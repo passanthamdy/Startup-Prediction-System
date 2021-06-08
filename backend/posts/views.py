@@ -11,19 +11,16 @@ from rest_framework.response import Response
 from rest_framework import permissions,status as  statu
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-
+from rest_framework.permissions import IsAuthenticated
+from profiles.permissions import UserWritePermission
+from rest_framework import authentication, permissions
 import json
 import pandas as pd
 import joblib
 model=joblib.load('modelPipeline5.pkl')
 dataset=pd.read_csv('https://raw.githubusercontent.com/AhmadAmr/start-up-prediction-system/main/companiesfinal.csv')
 
-#from django_filters.rest_framework import DjangoFilterBackend
 
-
-#after applying machine learning it would be only list View, 
-#dont forget to remove allowany permission
-#DONE
 class CreatePostView(generics.CreateAPIView):
     query_set= Post.objects.all()
     serializer_class = CreatePostSerializer
@@ -35,22 +32,25 @@ class PostListView(generics.ListAPIView):
 
 
 #dont forget to remove allowany permission
-class PostDetailView(generics.RetrieveUpdateDestroyAPIView):
+class PostDetailView(generics.RetrieveUpdateDestroyAPIView, UserWritePermission):
+    permission_classes =[UserWritePermission]
     queryset = Post.objects.order_by('-created_at')
     serializer_class = PostSerializer
     lookup_field = 'id'
-    #permission_classes = [AllowAny]
+    
 
 
 class PostLike(APIView):
+    
+    permission_classes = (permissions.IsAuthenticated,)
 
-    def get(self, request, slug = None, format=None):
-        obj = get_object_or_404(Post, slug=slug)
-        url_ = obj.get_abslute_url()
+    def get(self, request, id = None, format=None):
+        obj = get_object_or_404(Post, id=id)
+        
         user = self.request.user
         updated = False
         liked = False
-        if user.is_authnticated():
+        if user:
             if user in obj.likes.all():
                 liked = False
                 obj.likes.remove(user)
