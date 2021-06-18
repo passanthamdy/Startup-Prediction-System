@@ -17,7 +17,7 @@ from rest_framework import authentication, permissions
 import json
 import pandas as pd
 import joblib
-model = joblib.load('modelPipeline5.pkl')
+model = joblib.load('modelPipeline7.pkl')
 dataset = pd.read_csv(
     'https://raw.githubusercontent.com/AhmadAmr/start-up-prediction-system/main/companiesfinal.csv')
 
@@ -47,7 +47,7 @@ class AddPostDataset(APIView):
         # User data
         data = json.loads(request.body)
         dataF = pd.DataFrame({'x': data}).transpose()
-        print(dataF)
+        #print(dataF)
         filt1 = (dataset['country_code'] == data['country_code'])
         filt2 = (dataset['category_list'] == data['category_list'])
         country = dataset.loc[filt1]
@@ -69,7 +69,7 @@ class AddPostDataset(APIView):
         data['minfund'] = final['funding_total_usd'].median()
         data['post'] = id
         data['status'] = status
-        print(data)
+        #print(data)
         serializer = DatasetSerializer(data=data)
         if serializer.is_valid():
             serializer.save()

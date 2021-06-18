@@ -17,7 +17,7 @@ class CreatePostSerializer(serializers.ModelSerializer):
     )
     class Meta:
         model=Post
-        exclude = ['slug', 'likes']
+        exclude = [ 'likes']
 
         
 class CommentSerializer(serializers.ModelSerializer):
@@ -36,7 +36,7 @@ class PostSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True, read_only=True)
     class Meta:
         model =  Post 
-        exclude = ['slug', 'featured']
+        exclude = ['featured']
         lookup_field= 'id'
         readonly_field = ['user','dataset', 'id','likes', 'total_likes']
     def get_total_likes(self,obj):

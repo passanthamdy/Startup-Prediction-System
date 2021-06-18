@@ -7,10 +7,8 @@ urlpatterns = [
     path('list/', PostListView.as_view() ), #to list all posts
     path('list/<int:id>/',  PostDetailView.as_view()), #to get post, update and delete 
     path('list/like/<int:id>/',  PostLike.as_view()),
-    # path('comments/', CommentList.as_view()),
-    path('comments/' , PostCommentsView.as_view()),
-    #path('comments/<int:id>/', CommentDetail.as_view()),
-     
+   
+    path('comments/' , PostCommentsView.as_view()),     
 
 
 ]

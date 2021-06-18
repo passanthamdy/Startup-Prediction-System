@@ -13,7 +13,7 @@ class PostAdmin(admin.ModelAdmin):
         (None, {'fields': ( 'title','content','image',  'likes','featured','created_at','slug',)
         }),
     )
-    readonly_fields = ['created_at','slug']
+    readonly_fields = ['created_at']
 
     def save_model(self, request, obj, form, change):
         obj.user= request.user
