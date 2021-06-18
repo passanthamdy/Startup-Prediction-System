@@ -22,7 +22,7 @@ class Post(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
     image = models.ImageField( upload_to=upload_to, default = 'def.png')
-    slug = models.SlugField(max_length=200,null=True, blank= True, unique=True)
+    slug = models.SlugField(max_length=200,null=True, blank= True)
     likes = models.ManyToManyField("accounts.CustomUser", related_name= 'likes', blank=True)
     featured = models.BooleanField(default = False)
     created_at = models.DateTimeField( default= timezone.now)
