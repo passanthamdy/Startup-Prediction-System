@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'corsheaders',
-    
+    'phonenumber_field',
     'message_control',
     'rest_framework_simplejwt.token_blacklist',
     'posts',

@@ -55,6 +55,19 @@ class Dataset(models.Model):
     minfund=models.FloatField()
     status=models.BooleanField()
 
+
+class Comment(models.Model):
+    owner = models.ForeignKey('accounts.CustomUser', related_name='comments', on_delete=models.CASCADE)
+    post = models.ForeignKey('posts.Post', related_name='comments', on_delete=models.CASCADE)
+    body = models.TextField(blank=False)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['created']
+    
+    def __str__(self):
+        return self.owner
+
 """the signals that to every post one dataset model in database """
 
 # @receiver(post_save, sender=Post)
@@ -62,3 +75,5 @@ class Dataset(models.Model):
 #     if created:
 #         Dataset.objects.create(post=instance)
 #     instance.dataset.save()
+
+
