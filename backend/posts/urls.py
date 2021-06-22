@@ -1,5 +1,5 @@
 from django.urls import  path
-from .views import  PostDetailView, PostLike,AddPostDataset,CreatePostView, PostListView
+from .views import  PostDetailView, PostLike,AddPostDataset,CreatePostView, PostListView, CommentList,CommentDetail,PostCommentsView
 urlpatterns = [
     
     path('postcreate/', CreatePostView.as_view()), #to add post data like img and content bla
@@ -7,7 +7,8 @@ urlpatterns = [
     path('list/', PostListView.as_view() ), #to list all posts
     path('list/<int:id>/',  PostDetailView.as_view()), #to get post, update and delete 
     path('list/like/<int:id>/',  PostLike.as_view()),
-     
+   
+    path('comments/' , PostCommentsView.as_view()),     
 
 
 ]

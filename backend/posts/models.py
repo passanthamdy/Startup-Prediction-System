@@ -22,7 +22,6 @@ class Post(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
     image = models.ImageField( upload_to=upload_to, default = 'def.png')
-    slug = models.SlugField(max_length=200,null=True, blank= True)
     likes = models.ManyToManyField("accounts.CustomUser", related_name= 'likes', blank=True)
     featured = models.BooleanField(default = False)
     created_at = models.DateTimeField( default= timezone.now)
@@ -55,6 +54,19 @@ class Dataset(models.Model):
     minfund=models.FloatField()
     status=models.BooleanField()
 
+
+class Comment(models.Model):
+    owner = models.ForeignKey('accounts.CustomUser', related_name='comments', on_delete=models.CASCADE)
+    post = models.ForeignKey('posts.Post', related_name='comments', on_delete=models.CASCADE)
+    body = models.TextField(blank=False)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['created']
+    
+    def __str__(self):
+        return self.owner
+
 """the signals that to every post one dataset model in database """
 
 # @receiver(post_save, sender=Post)
@@ -62,3 +74,5 @@ class Dataset(models.Model):
 #     if created:
 #         Dataset.objects.create(post=instance)
 #     instance.dataset.save()
+
+
