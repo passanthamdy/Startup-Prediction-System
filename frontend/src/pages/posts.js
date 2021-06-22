@@ -3,7 +3,7 @@ import ScrollToTop from '../components/ScrollToTop';
 import SubNavbar from '../components/SubNav';
 import SubSide from '../components/SubSide'
 import {Button} from '../components/ButtonElements'
-
+import Posts from '../components/Posts'
 const PostsPage = () => {
     const[isOpen, setIsOpen] = useState(false);
 
@@ -12,11 +12,11 @@ const PostsPage = () => {
     }
     return (
         <>
-          <ScrollToTop />
-          <SubNavbar toggle={toggle}/>
-          <SubSide isOpen = {isOpen} toggle= {toggle}/>
-          <br />
-        
+        <ScrollToTop />
+        <SubNavbar toggle={toggle}/>
+        <SubSide isOpen = {isOpen} toggle= {toggle}/>
+        <br />
+        <Posts />
           
         </>
     )
